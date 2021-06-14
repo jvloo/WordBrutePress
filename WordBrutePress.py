@@ -24,7 +24,8 @@
 # 2) http and https protocols
 # 3) Random User Agent
 
-import urllib, httplib, httplib2
+import urllib, httplib2
+import http.client as httplib
 import socket, sys, os, os.path, optparse, random
 from threading import Thread
 from time import sleep
@@ -182,7 +183,7 @@ def connection(url,user,password,UA,timeout):
     headers = headersCMS(UA)
 
     try:
-        response, content = http.request(url, 'POST', headers=headers, body=urllib.urlencode(body))
+        response, content = http.request(url, 'POST', headers=headers, body=urllib.parse.urlencode(body))
 
         if str(response.status)[0] == "4" or str(response.status)[0] == "5":
             print('\n[X] HTTP error, code: '+str(response.status))
